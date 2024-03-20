@@ -33,6 +33,20 @@ export const logout = createAsyncThunk(
     }
 );
 
+//login an user
+export const login = createAsyncThunk(
+    'auth/login',
+    async (user, thunkAPI) => {
+        const response = await authService.login(user);
+        
+        if(response.errors){
+            return thunkAPI.rejectWithValue(response.errors[0]);
+        }
+
+        return response;
+    }
+);
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -44,27 +58,48 @@ const authSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(register.pending, (state) => {
+        builder
+        .addCase(register.pending, (state) => {
             state.loading = true;
             state.sucess = false;
             state.error = false;
-        });
-        builder.addCase(register.fulfilled, (state, action) => {
+        })
+        .addCase(register.fulfilled, (state, action) => {
             state.loading = false;
             state.sucess = true;
             state.error = false;
             state.user = action.payload;
-        });
-        builder.addCase(register.rejected, (state, action) => {
+        })
+        .addCase(register.rejected, (state, action) => {
             state.loading = false;
             state.sucess = false;
             state.error = action.payload;
         });
+
         builder.addCase(logout.fulfilled, (state) => {
             state.user = null;
             state.loading = false;
             state.sucess = false;
             state.error = false;
+        });
+
+        builder
+        .addCase(login.pending, (state) => {
+            state.loading = true;
+            state.sucess = false;
+            state.error = false;
+        })
+        .addCase(login.fulfilled, (state, action) => {
+            state.loading = false;
+            state.sucess = true;
+            state.error = false;
+            state.user = action.payload;
+        })
+        .addCase(login.rejected, (state, action) => {
+            state.loading = false;
+            state.sucess = false;
+            state.error = action.payload;
+            console.log(action.payload);
         });
     }
 });
