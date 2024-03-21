@@ -18,9 +18,9 @@ const Profile = () => {
 
     console.log(user);
     // Load user data
-    useEffect(async () => {
-        await dispatch(profile());
-    }, [dispatch]);
+    useEffect(() => {
+        dispatch(profile());
+      }, [dispatch]);
 
     // fill user form
     useEffect(() => {
@@ -45,13 +45,6 @@ const Profile = () => {
         <div id='edit-profile'>
             <h2>Edite seus dados</h2>
             <p className='subtitle'>Adicione uma imagem de perfil e conte mais sobre voce...</p>
-            {console.log(user.profileImage, previewImage)}
-            {(user.profileImage || previewImage) && (
-                <img 
-                    src={previewImage || `${upload}/users/${user.profileImage}`} 
-                    alt={name}
-                />
-            )}
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
