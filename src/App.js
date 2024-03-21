@@ -12,6 +12,7 @@ import {useAuth} from './hooks/useAuth';
 //components
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import EditProfile from './pages/EditProfile/EditProfile.js';
 
 function App() {
   const {auth, loading} = useAuth();
@@ -28,6 +29,10 @@ function App() {
             <Route path='/' element={auth ? <Home /> : <Navigate to='/login'/>}/>
             <Route path='/login' element={!auth ? <Login /> : <Navigate to='/'/>}/>
             <Route path='/register' element={!auth ? <Register /> : <Home to='/'/>} />
+            <Route
+              path="/profile"
+              element={auth ? <EditProfile /> : <Navigate to="/login" />}
+            />
           </Routes>
         </div>
         <Footer />

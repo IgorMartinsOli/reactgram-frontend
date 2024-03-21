@@ -30,7 +30,6 @@ export const login = async (user) => {
         const data = await response.json();
 
         if(data._id){
-            console.log('salvou');
             localStorage.setItem('user', JSON.stringify(data));
         }
 

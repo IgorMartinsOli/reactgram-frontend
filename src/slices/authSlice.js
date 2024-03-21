@@ -99,7 +99,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.sucess = false;
             state.error = action.payload;
-            console.log(action.payload);
         });
     }
 });
