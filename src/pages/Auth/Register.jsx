@@ -18,7 +18,7 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const dispatch = useDispatch(); 
-    const {loading, error, success} = useSelector(state => state.auth);
+    const {loading, error} = useSelector(state => state.auth);
 
     const handleSubmit = (e) => {
         e.preventDefault()
